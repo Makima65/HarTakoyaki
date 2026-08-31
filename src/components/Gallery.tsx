@@ -9,14 +9,14 @@ export default function Gallery() {
   const loopReverseData = [...reverseData, ...reverseData, ...reverseData, ...reverseData];
 
   return (
-    <section id="gallery" className="w-full py-24 md:py-32 bg-black overflow-hidden border-t border-neutral-900">
+    <section id="gallery" className="w-full py-24 md:py-32 bg-[#121212] overflow-hidden border-t border-neutral-900">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div>
-          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 flex items-center gap-4 mb-6">
-            <span className="w-8 h-[1px] bg-neutral-600"></span> CLICK ANY FRAME TO EXPLORE
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B00] flex items-center gap-4 mb-6">
+            <span className="w-8 h-[1px] bg-[#FF6B00]"></span> FRESH FROM THE PAN
           </span>
-          <h2 className="text-4xl md:text-6xl font-serif tracking-tight text-white">
-            Moments of pure <span className="italic text-neutral-300">relaxation.</span>
+          <h2 className="text-4xl md:text-6xl font-sans font-black tracking-tight text-white">
+            Crafted for your <span className="italic text-[#FF6B00]">cravings.</span>
           </h2>
         </div>
         
