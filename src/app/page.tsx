@@ -2,8 +2,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Menu from "@/components/Menu";
-import HowItWorks from "@/components/HowItWorks";
-import Amenities from "@/components/Amenities";
 import Gallery from "@/components/Gallery";
 import Reviews from "@/components/Reviews";
 import Inquire from "@/components/Inquire";
@@ -17,8 +15,6 @@ export default function Home() {
       <Hero />
       <About />
       <Menu />
-      <HowItWorks />
-      <Amenities />
       <Gallery />
       <Reviews />
       <Inquire />
