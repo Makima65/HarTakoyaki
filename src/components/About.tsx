@@ -50,10 +50,11 @@ export default function About() {
             {/* Video Element */}
             <video
               src="/reels4.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
+              autoPlay={true}
+              loop={true}
+              muted={true}
+              defaultMuted={true}
+              playsInline={true}
               className="absolute inset-0 w-full h-full object-cover z-10"
             />
 
