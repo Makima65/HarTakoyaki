@@ -49,13 +49,16 @@ export default function About() {
 
             {/* Video Element */}
             <video
-              src="/reels4.mp4"
               autoPlay={true}
               loop={true}
               muted={true}
               playsInline={true}
+              preload="auto"
               className="absolute inset-0 w-full h-full object-cover z-10"
-            />
+            >
+              <source src="/reels4.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
             {/* Fallback overlay */}
             <div className="absolute inset-0 bg-neutral-900 z-0 animate-pulse" />
