@@ -1,6 +1,6 @@
 export const resortData = {
   branding: {
-    name: "Siligna Resort and Events Place",
+    name: "HarTakoyaki",
     tagline: "A Private Sanctuary in the Heart of the Tropics",
     heroHeading: "Where Silence Meets Elegance",
     heroLabel: "— EXCLUSIVE PRIVATE VILLA",
@@ -93,7 +93,7 @@ export const resortData = {
     },
     {
       url: "/takoyakibg3.jpg",
-      alt: "Hand holding a signature foil boat of takoyaki in front of the Har Takoyaki menu board",
+      alt: "Hand holding a signature foil boat of takoyaki in front of the HarTakoyaki menu board",
       label: "SIGNATURE",
       title: "The Classic Boat",
     },

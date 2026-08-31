@@ -4,7 +4,7 @@ export const generateOrderSummary = (
   quantity: number,
   priceTotal: number
 ): string => {
-  return `Konichiwa Har Takoyaki! 🐙\n\nI'd like to place an order:\n\n🛒 Item: ${quantity}x ${itemName}\n📏 Size: ${size}\n💰 Total: ₱${priceTotal}\n\nPlease let me know how to proceed with payment and delivery!`;
+  return `Konichiwa HarTakoyaki! 🐙\n\nI'd like to place an order:\n\n🛒 Item: ${quantity}x ${itemName}\n📏 Size: ${size}\n💰 Total: ₱${priceTotal}\n\nPlease let me know how to proceed with payment and delivery!`;
 };
 
 export const handleMessengerRedirect = async (

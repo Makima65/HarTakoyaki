@@ -48,7 +48,7 @@ export default function Preloader() {
               transition={{ duration: 0.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="font-serif text-white text-5xl md:text-7xl lg:text-8xl tracking-tight"
             >
-              Siligna,
+              HarTakoyaki,
             </motion.h1>
 
             <motion.p

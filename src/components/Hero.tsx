@@ -52,7 +52,7 @@ const MatrixText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
 };
 
 export default function Hero() {
-  const backgroundImagePath = "/takoyakibg7.jpg"; // Placeholder for future Har Takoyaki image
+  const backgroundImagePath = "/takoyakibg7.jpg"; // Placeholder for future HarTakoyaki image
   const introText = "WELCOME TO".split("");
 
   return (
@@ -108,7 +108,7 @@ export default function Hero() {
         >
           <Image
             src="/brand-logo.png"
-            alt="Har Takoyaki Logo"
+            alt="HarTakoyaki Logo"
             width={1024}
             height={190}
             priority

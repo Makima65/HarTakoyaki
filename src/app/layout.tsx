@@ -8,8 +8,8 @@ const playfair = Playfair_Display({ subsets: ["latin"], style: ["normal", "itali
 const spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: `${resortData.branding.name} | ${resortData.branding.tagline}`,
-  description: resortData.branding.tagline,
+  title: "HarTakoyaki",
+  description: "Authentic Japanese Takoyaki in Mandaluyong and San Andres.",
 };
 
 export default function RootLayout({

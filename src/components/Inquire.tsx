@@ -32,7 +32,7 @@ export default function Inquire() {
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
   const formatMessage = () => {
-    return `Hello Har Takoyaki! I'd like to order:\nFlavor: ${flavor}\nSize: ${size}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+    return `Hello HarTakoyaki! I'd like to order:\nFlavor: ${flavor}\nSize: ${size}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
   };
 
   const handleCheckoutFB = () => {

@@ -56,7 +56,7 @@ export default function Navbar() {
             <div className="flex-1 flex justify-center md:justify-start md:flex-none">
               <Image 
                 src="/nav-logo.png" 
-                alt="Har Takoyaki Logo" 
+                alt="HarTakoyaki Logo" 
                 width={56} 
                 height={56} 
                 className="w-14 h-14 object-contain"
@@ -116,7 +116,7 @@ export default function Navbar() {
               <div className="flex justify-between items-center mb-10">
                 <Image 
                   src="/nav-logo.png" 
-                  alt="Har Takoyaki Logo" 
+                  alt="HarTakoyaki Logo" 
                   width={56} 
                   height={56} 
                   className="w-14 h-14 object-contain"

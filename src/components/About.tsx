@@ -53,7 +53,6 @@ export default function About() {
               autoPlay={true}
               loop={true}
               muted={true}
-              defaultMuted={true}
               playsInline={true}
               className="absolute inset-0 w-full h-full object-cover z-10"
             />
