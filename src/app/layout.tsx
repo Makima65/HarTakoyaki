@@ -10,6 +10,10 @@ const spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], varia
 export const metadata: Metadata = {
   title: "HarTakoyaki",
   description: "Authentic Japanese Takoyaki in Mandaluyong and San Andres.",
+  icons: {
+    icon: "/nav-logo.png",
+    apple: "/nav-logo.png",
+  },
 };
 
 export default function RootLayout({

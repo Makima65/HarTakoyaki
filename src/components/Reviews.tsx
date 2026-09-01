@@ -58,17 +58,28 @@ export default function Reviews() {
   return (
     <section id="reviews" className="w-full py-24 bg-[#121212] overflow-hidden">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-8 mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 flex items-center gap-4 mb-6">
             <span className="w-8 h-[1px] bg-neutral-600"></span> REVIEWS & FEEDBACKS
           </span>
           <h2 className="text-4xl md:text-5xl font-sans font-black text-white tracking-tight">
             Voices of Satisfaction.<br />Shared by our customers.
           </h2>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="flex flex-col gap-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        className="flex flex-col gap-8"
+      >
         {/* Track 1: Scrolls Left */}
         <div className="relative w-full flex overflow-hidden">
           <motion.div
@@ -142,7 +153,7 @@ export default function Reviews() {
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

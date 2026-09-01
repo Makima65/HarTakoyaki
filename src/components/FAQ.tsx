@@ -61,20 +61,32 @@ export default function FAQ() {
   return (
     <section id="faq" className="w-full py-24 lg:py-32 px-6 md:px-8 bg-black border-t border-neutral-900">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-16"
+        >
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 flex items-center gap-4 mb-6">
             <span className="w-8 h-[1px] bg-neutral-600"></span> FAQ
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-black tracking-tight leading-tight">
             <span className="text-white block">Got questions?</span> <span className="text-neutral-300 block">Everything you need to know.</span>
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col border-t border-neutral-900">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="flex flex-col border-t border-neutral-900"
+        >
           {faqsData.map((faq, index) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

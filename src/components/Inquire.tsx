@@ -59,17 +59,29 @@ export default function Inquire() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         {/* Header */}
-        <div className="mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-20"
+        >
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#FF6B00] mb-6 block">
             ORDER ONLINE
           </span>
           <h2 className="text-4xl lg:text-6xl font-sans font-black tracking-tight leading-[1.1] text-white">
             Ready to satisfy your <span className="italic text-[#FF6B00]">cravings?</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Main Interactive Area */}
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-8 items-center min-h-[500px]">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-8 items-center min-h-[500px]"
+        >
           
           {/* Left Column */}
           <div className="lg:col-span-4 flex flex-col w-full max-w-md lg:max-w-[340px] mx-auto lg:mx-0">
@@ -256,7 +268,7 @@ export default function Inquire() {
             </div>
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

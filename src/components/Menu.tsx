@@ -53,8 +53,8 @@ export default function Menu() {
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
               className="bg-neutral-900 rounded-2xl overflow-hidden flex flex-col border border-neutral-800"
             >
               {/* Top Half (Image) */}
