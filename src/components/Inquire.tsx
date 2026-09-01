@@ -227,7 +227,7 @@ export default function Inquire() {
               {step === 2 && "Select your preferred portion size."}
               {step === 3 && "Provide your basic contact details so we can reach you for updates."}
               {step === 4 && "Enter your complete delivery address including any helpful landmarks."}
-              {step === 5 && "Review your order details. Clicking send will copy your order and open your selected messaging app."}
+              {step === 5 && "Review your details below. Click to send via Messenger or Instagram—your order will be automatically copied to your clipboard, so just paste it into our chat! Feel free to take a screenshot of this receipt for your records as well."}
             </p>
 
             {/* Navigation Controls */}
