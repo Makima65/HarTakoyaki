@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, Info, Sparkles, Image as ImageIcon } from "lucide-react";
+import { Menu, X, Home, Info, Utensils, MessageSquare, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 
 export default function Navbar() {
@@ -28,9 +28,9 @@ export default function Navbar() {
   const navLinks = [
     { name: "HOME", href: "#home", icon: Home },
     { name: "ABOUT", href: "#about", icon: Info },
-    { name: "MENU", href: "#menu", icon: Sparkles },
+    { name: "MENU", href: "#menu", icon: Utensils },
     { name: "GALLERY", href: "#gallery", icon: ImageIcon },
-    { name: "REVIEWS", href: "#reviews", icon: Sparkles },
+    { name: "REVIEWS", href: "#reviews", icon: MessageSquare },
   ];
 
   return (
@@ -42,7 +42,7 @@ export default function Navbar() {
           }`}
       >
         <div className="max-w-screen-2xl mx-auto px-6 md:px-8">
-          <div className="flex items-center justify-between w-full">
+          <div className="relative flex items-center justify-between w-full h-14">
 
             {/* Mobile: Hamburger */}
             <button
@@ -53,7 +53,7 @@ export default function Navbar() {
             </button>
 
             {/* Logo */}
-            <div className="flex-1 flex justify-center md:justify-start md:flex-none">
+            <div className="absolute left-1/2 -translate-x-1/2 md:static md:left-auto md:translate-x-0">
               <Image 
                 src="/nav-logo.png" 
                 alt="HarTakoyaki Logo" 

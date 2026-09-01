@@ -130,17 +130,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-row justify-center gap-4"
+          className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
         >
           <a
             href="#inquire"
-            className="border border-[#FF6B00] bg-[#FF6B00] text-white px-8 py-3 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] hover:bg-orange-600 hover:border-orange-600 transition-colors shadow-md rounded-sm"
+            className="border border-[#FF6B00] bg-[#FF6B00] text-white px-8 py-3 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] hover:bg-orange-600 hover:border-orange-600 transition-colors shadow-md rounded-sm w-full sm:w-auto text-center"
           >
             Order Now
           </a>
           <a
             href="#about"
-            className="border border-white text-white px-8 py-3 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors shadow-md bg-transparent rounded-sm"
+            className="border border-white text-white px-8 py-3 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors shadow-md bg-transparent rounded-sm w-full sm:w-auto text-center"
           >
             Explore
           </a>
@@ -151,21 +151,21 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 3.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-16 flex flex-col items-center"
+          className="mt-16 flex flex-col items-center w-full"
         >
           {/* Stats Grid */}
-          <div className="grid grid-cols-3 gap-8 md:gap-16 text-center mb-10">
-            <div className="flex flex-col">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-16 text-center items-center justify-center mb-10 w-full px-2">
+            <div className="flex flex-col items-center">
               <span className="text-3xl md:text-4xl font-sans font-bold text-white mb-2"><MatrixText text="10,000+" delay={3.5} /></span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Takoyaki Served</span>
+              <span className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Takoyaki Served</span>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <span className="text-3xl md:text-4xl font-sans font-bold text-white mb-2"><MatrixText text="2K+" delay={3.5} /></span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Followers</span>
+              <span className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Followers</span>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <span className="text-3xl md:text-4xl font-sans font-bold text-white mb-2"><MatrixText text="99%" delay={3.5} /></span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Satisfaction</span>
+              <span className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Satisfaction</span>
             </div>
           </div>
 
