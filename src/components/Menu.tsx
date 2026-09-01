@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import { FaFishFins } from "react-icons/fa6";
+import { GiSadCrab, GiOctopus, GiCheeseWedge } from "react-icons/gi";
 
 const menuItems = [
   {
@@ -7,29 +9,38 @@ const menuItems = [
     title: "Crab & Cheese",
     image: "/takoyakibg10.jpg", // Generic placeholder using the hero image
     badge: "Best Seller",
-    tags: ["🦀 Crab", "🧀 Cheese"],
+    tags: [
+      <><GiSadCrab className="text-pink-500 w-3.5 h-3.5" /> Crab</>,
+      <><GiCheeseWedge className="text-yellow-400 w-3.5 h-3.5" /> Cheese</>
+    ],
     description: "A warm, melty hug of cheese loaded with premium crab meat for a rich, ocean-sea fresh flavor.",
-    price8pcs: "Php 110",
-    price4pcs: "Php 55"
+    price8pcs: "₱110",
+    price4pcs: "₱55"
   },
   {
     id: "octobits",
     title: "Octobits",
     image: "/takoyakibg8.jpg",
     badge: "Classic",
-    tags: ["🐙 Octopus", "🐟 Bonito Flakes"],
+    tags: [
+      <><GiOctopus className="text-pink-500 w-3.5 h-3.5" /> Octopus</>,
+      <><FaFishFins className="text-blue-400 w-3.5 h-3.5" /> Bonito Flakes</>
+    ],
     description: "Golden takoyaki balls packed with juicy octopus bits, drizzled with traditional sauces and topped with bonito flakes.",
-    price8pcs: "Php 110",
-    price4pcs: "Php 55"
+    price8pcs: "₱110",
+    price4pcs: "₱55"
   },
   {
     id: "grilled-cheesebomb",
     title: "Grilled Cheesebomb",
     image: "/takoyakibg7.jpg",
     badge: "Fan Favorite",
-    tags: ["🧀 Triple Cheese", "🐙 Octopus"],
+    tags: [
+      <><GiCheeseWedge className="text-yellow-400 w-3.5 h-3.5" /> Triple Cheese</>,
+      <><GiOctopus className="text-pink-500 w-3.5 h-3.5" /> Octopus</>
+    ],
     description: "A crispy, cheese explosion stuffed with your choice of Crab or Octobits for the ultimate savory bite.",
-    price8pcs: "Php 150",
+    price8pcs: "₱150",
     price4pcs: ""
   }
 ];
@@ -80,7 +91,7 @@ export default function Menu() {
                 {/* Ingredient Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {item.tags.map((tag, i) => (
-                    <span key={i} className="bg-neutral-800 text-neutral-300 text-xs px-2 py-1 rounded-full">
+                    <span key={i} className="bg-neutral-800 text-neutral-300 text-xs px-2 py-1 rounded-full flex items-center gap-1.5">
                       {tag}
                     </span>
                   ))}

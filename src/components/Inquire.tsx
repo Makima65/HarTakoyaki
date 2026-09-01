@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, Hash, User, Phone, MapPin } from "lucide-react";
+import { GiSadCrab, GiOctopus, GiCheeseWedge } from "react-icons/gi";
 
-const OptionCard = ({ title, subtitle, icon: Icon, emoji, isSelected, onClick }: any) => (
+const OptionCard = ({ title, subtitle, icon: Icon, customIcon, isSelected, onClick }: any) => (
   <button
     onClick={onClick}
     className={`w-full p-4 rounded-3xl flex items-center gap-4 transition-all duration-300 border border-transparent ${
@@ -11,7 +12,7 @@ const OptionCard = ({ title, subtitle, icon: Icon, emoji, isSelected, onClick }:
     }`}
   >
     <div className={`p-3 rounded-xl border flex flex-shrink-0 items-center justify-center transition-colors ${isSelected ? "bg-[#FF6B00] border-[#FF6B00] text-white" : "bg-white/5 border-white/10 text-neutral-400"}`}>
-      {emoji ? <span className="text-xl leading-none">{emoji}</span> : (Icon && <Icon className="w-5 h-5" />)}
+      {customIcon ? customIcon : (Icon && <Icon className="w-5 h-5" />)}
     </div>
     <div className="flex flex-col items-start text-left flex-grow">
       <span className="font-sans font-semibold text-white text-base">{title}</span>
@@ -97,15 +98,15 @@ export default function Inquire() {
               {step === 1 && (
                 <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-3">
                   {[
-                    { name: "Crab & Cheese", emoji: "🦀" },
-                    { name: "Octobits", emoji: "🐙" },
-                    { name: "Grilled Cheesebomb", emoji: "🧀" }
+                    { name: "Crab & Cheese", customIcon: <GiSadCrab className="w-6 h-6" /> },
+                    { name: "Octobits", customIcon: <GiOctopus className="w-6 h-6" /> },
+                    { name: "Grilled Cheesebomb", customIcon: <GiCheeseWedge className="w-6 h-6" /> }
                   ].map((f) => (
                     <OptionCard 
                       key={f.name}
                       title={f.name}
                       subtitle="SELECT FLAVOR"
-                      emoji={f.emoji}
+                      customIcon={f.customIcon}
                       isSelected={flavor === f.name}
                       onClick={() => {
                         setFlavor(f.name);
