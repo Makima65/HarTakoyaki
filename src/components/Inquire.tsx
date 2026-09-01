@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, Sparkles, Utensils, Hash, User, Phone, MapPin } from "lucide-react";
+import { ChevronRight, ChevronLeft, Hash, User, Phone, MapPin } from "lucide-react";
 
-const OptionCard = ({ title, subtitle, icon: Icon, isSelected, onClick }: any) => (
+const OptionCard = ({ title, subtitle, icon: Icon, emoji, isSelected, onClick }: any) => (
   <button
     onClick={onClick}
     className={`w-full p-4 rounded-3xl flex items-center gap-4 transition-all duration-300 border border-transparent ${
@@ -11,7 +11,7 @@ const OptionCard = ({ title, subtitle, icon: Icon, isSelected, onClick }: any) =
     }`}
   >
     <div className={`p-3 rounded-xl border flex flex-shrink-0 items-center justify-center transition-colors ${isSelected ? "bg-[#FF6B00] border-[#FF6B00] text-white" : "bg-white/5 border-white/10 text-neutral-400"}`}>
-      <Icon className="w-5 h-5" />
+      {emoji ? <span className="text-xl leading-none">{emoji}</span> : (Icon && <Icon className="w-5 h-5" />)}
     </div>
     <div className="flex flex-col items-start text-left flex-grow">
       <span className="font-sans font-semibold text-white text-base">{title}</span>
@@ -96,15 +96,19 @@ export default function Inquire() {
             <AnimatePresence mode="wait">
               {step === 1 && (
                 <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-3">
-                  {["Crab & Cheese", "Octobits", "Grilled Cheesebomb"].map((f) => (
+                  {[
+                    { name: "Crab & Cheese", emoji: "🦀" },
+                    { name: "Octobits", emoji: "🐙" },
+                    { name: "Grilled Cheesebomb", emoji: "🧀" }
+                  ].map((f) => (
                     <OptionCard 
-                      key={f}
-                      title={f}
+                      key={f.name}
+                      title={f.name}
                       subtitle="SELECT FLAVOR"
-                      icon={Utensils}
-                      isSelected={flavor === f}
+                      emoji={f.emoji}
+                      isSelected={flavor === f.name}
                       onClick={() => {
-                        setFlavor(f);
+                        setFlavor(f.name);
                         setSize(""); // Reset size when flavor changes
                       }}
                     />
@@ -209,10 +213,6 @@ export default function Inquire() {
 
           {/* Right Column: Descriptions & Controls */}
           <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end text-left lg:text-right relative h-full w-full max-w-md lg:max-w-[320px] mx-auto lg:mx-0 lg:ml-auto">
-            <div className="w-10 h-10 rounded-xl bg-[#2a1a11] flex items-center justify-center text-[#FF6B00] mb-8 lg:mb-12 shadow-[0_0_15px_rgba(255,107,0,0.2)]">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            
             <h3 className="font-sans font-bold text-2xl md:text-3xl text-white mb-4 leading-tight max-w-xs">
               {step === 1 && "Pick your flavor."}
               {step === 2 && "How hungry are you?"}
@@ -230,7 +230,7 @@ export default function Inquire() {
             </p>
 
             {/* Navigation Controls */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-auto w-full justify-start lg:justify-end">
+            <div className="flex flex-col sm:flex-row items-center gap-3 mt-8 w-full justify-start lg:justify-end">
               {step > 1 && (
                 <button onClick={prevStep} className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-[#1c1c1c] text-white hover:bg-[#2a2a2a] transition-colors border border-neutral-800">
                   <ChevronLeft className="w-5 h-5" />
