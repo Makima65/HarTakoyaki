@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, Hash, User, Phone, MapPin } from "lucide-react";
+import { ChevronRight, ChevronLeft, Hash, User, Phone, MapPin, Plus, Minus, ShoppingCart } from "lucide-react";
 import { GiSadCrab, GiOctopus, GiCheeseWedge } from "react-icons/gi";
 
 const OptionCard = ({ title, subtitle, icon: Icon, customIcon, isSelected, onClick }: any) => (
@@ -23,8 +23,8 @@ const OptionCard = ({ title, subtitle, icon: Icon, customIcon, isSelected, onCli
 
 export default function Inquire() {
   const [step, setStep] = useState(1);
-  const [flavor, setFlavor] = useState("");
-  const [size, setSize] = useState("");
+  const [selectedFlavors, setSelectedFlavors] = useState<string[]>([]);
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -32,8 +32,29 @@ export default function Inquire() {
   const nextStep = () => setStep((s) => Math.min(s + 1, 5));
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
+  const flavorsList = [
+    { name: "Crab & Cheese", customIcon: <GiSadCrab className="w-6 h-6" />, basePrice: 110 },
+    { name: "Octobits", customIcon: <GiOctopus className="w-6 h-6" />, basePrice: 110 },
+    { name: "Grilled Cheesebomb", customIcon: <GiCheeseWedge className="w-6 h-6" />, basePrice: 150 }
+  ];
+
+  const calculateTotal = () => {
+    return selectedFlavors.reduce((total, flavor) => {
+      const flavorData = flavorsList.find(f => f.name === flavor);
+      const qty = quantities[flavor] || 1;
+      return total + (flavorData ? flavorData.basePrice * qty : 0);
+    }, 0);
+  };
+
   const formatMessage = () => {
-    return `Hello HarTakoyaki! I'd like to order:\nFlavor: ${flavor}\nSize: ${size}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+    let orderDetails = selectedFlavors.map(flavor => {
+      const qty = quantities[flavor] || 1;
+      const flavorData = flavorsList.find(f => f.name === flavor);
+      const price = flavorData ? flavorData.basePrice * qty : 0;
+      return `${qty}x ${flavor} (Php ${price})`;
+    }).join("\n");
+    
+    return `Hello HarTakoyaki! I'd like to order:\n\n${orderDetails}\n\nTotal Amount: Php ${calculateTotal()}\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
   };
 
   const handleCheckoutFB = () => {
@@ -50,10 +71,23 @@ export default function Inquire() {
     });
   };
 
-  // Determine size options based on flavor
-  const sizeOptions = flavor === "Grilled Cheesebomb" 
-    ? [{ title: "8pcs", price: "Php 150" }]
-    : [{ title: "4pcs", price: "Php 55" }, { title: "8pcs", price: "Php 110" }];
+  const toggleFlavor = (flavorName: string) => {
+    if (selectedFlavors.includes(flavorName)) {
+      setSelectedFlavors(selectedFlavors.filter(f => f !== flavorName));
+      const newQuantities = { ...quantities };
+      delete newQuantities[flavorName];
+      setQuantities(newQuantities);
+    } else {
+      setSelectedFlavors([...selectedFlavors, flavorName]);
+      setQuantities({ ...quantities, [flavorName]: 1 });
+    }
+  };
+
+  const updateQuantity = (flavorName: string, delta: number) => {
+    const currentQty = quantities[flavorName] || 1;
+    const newQty = Math.max(1, currentQty + delta);
+    setQuantities({ ...quantities, [flavorName]: newQty });
+  };
 
   return (
     <section id="inquire" className="w-full py-16 md:py-24 bg-[#121212] text-white overflow-hidden border-t border-neutral-900 relative">
@@ -88,7 +122,7 @@ export default function Inquire() {
           <div className="lg:col-span-4 flex flex-col w-full max-w-md lg:max-w-[340px] mx-auto lg:mx-0">
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 mb-6 block">
               {step === 1 && "FLAVOR SELECTION"}
-              {step === 2 && "PORTION SIZE"}
+              {step === 2 && "QUANTITY"}
               {step === 3 && "CONTACT DETAILS"}
               {step === 4 && "DELIVERY INFO"}
               {step === 5 && "ORDER SUMMARY"}
@@ -97,21 +131,14 @@ export default function Inquire() {
             <AnimatePresence mode="wait">
               {step === 1 && (
                 <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-3">
-                  {[
-                    { name: "Crab & Cheese", customIcon: <GiSadCrab className="w-6 h-6" /> },
-                    { name: "Octobits", customIcon: <GiOctopus className="w-6 h-6" /> },
-                    { name: "Grilled Cheesebomb", customIcon: <GiCheeseWedge className="w-6 h-6" /> }
-                  ].map((f) => (
+                  {flavorsList.map((f) => (
                     <OptionCard 
                       key={f.name}
                       title={f.name}
                       subtitle="SELECT FLAVOR"
                       customIcon={f.customIcon}
-                      isSelected={flavor === f.name}
-                      onClick={() => {
-                        setFlavor(f.name);
-                        setSize(""); // Reset size when flavor changes
-                      }}
+                      isSelected={selectedFlavors.includes(f.name)}
+                      onClick={() => toggleFlavor(f.name)}
                     />
                   ))}
                 </motion.div>
@@ -119,16 +146,38 @@ export default function Inquire() {
 
               {step === 2 && (
                 <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-3">
-                  {sizeOptions.map((opt) => (
-                    <OptionCard 
-                      key={opt.title}
-                      title={opt.title}
-                      subtitle={opt.price}
-                      icon={Hash}
-                      isSelected={size === `${opt.title} - ${opt.price}`}
-                      onClick={() => setSize(`${opt.title} - ${opt.price}`)}
-                    />
-                  ))}
+                  {selectedFlavors.length === 0 && (
+                     <div className="text-neutral-500 font-sans text-sm italic">Please go back and select a flavor first.</div>
+                  )}
+                  {selectedFlavors.map((flavorName) => {
+                    const flavorData = flavorsList.find(f => f.name === flavorName);
+                    const qty = quantities[flavorName] || 1;
+                    const price = flavorData ? flavorData.basePrice * qty : 0;
+                    return (
+                      <div key={flavorName} className="bg-[#1c1c1c] p-4 rounded-3xl flex items-center justify-between border border-neutral-800 mb-2">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 bg-[#FF6B00]/20 text-[#FF6B00] rounded-xl flex items-center justify-center">
+                            {flavorData?.customIcon}
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-white font-sans font-semibold text-sm">{flavorName}</span>
+                            <span className="text-[#FF6B00] font-sans font-bold text-xs">Php {price}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 bg-black rounded-full p-1 border border-neutral-800">
+                          <button onClick={() => updateQuantity(flavorName, -1)} className="w-7 h-7 rounded-full bg-[#1c1c1c] text-white flex items-center justify-center hover:bg-[#2a2a2a] transition-colors"><Minus className="w-3 h-3"/></button>
+                          <span className="text-white font-sans font-semibold text-sm w-4 text-center">{qty}</span>
+                          <button onClick={() => updateQuantity(flavorName, 1)} className="w-7 h-7 rounded-full bg-[#FF6B00] text-white flex items-center justify-center hover:bg-[#ff8533] transition-colors"><Plus className="w-3 h-3"/></button>
+                        </div>
+                      </div>
+                    )
+                  })}
+                  {selectedFlavors.length > 0 && (
+                    <div className="mt-2 pt-4 border-t border-neutral-800 flex justify-between items-center px-2">
+                       <span className="text-neutral-400 font-sans text-sm uppercase tracking-widest font-bold">Subtotal</span>
+                       <span className="text-white font-sans font-bold text-xl">Php {calculateTotal()}</span>
+                    </div>
+                  )}
                 </motion.div>
               )}
 
@@ -166,21 +215,31 @@ export default function Inquire() {
               {step === 5 && (
                 <motion.div key="step5" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-3">
                   <div className="bg-[#1c1c1c] p-6 rounded-3xl flex flex-col gap-4 border border-neutral-800">
-                    <div className="flex justify-between items-center border-b border-neutral-800 pb-4">
-                      <span className="text-neutral-400 font-sans text-sm">Flavor</span>
-                      <span className="text-white font-sans font-semibold text-right">{flavor || "-"}</span>
+                    <div className="flex flex-col gap-3 border-b border-neutral-800 pb-4">
+                      <span className="text-neutral-400 font-sans text-sm flex items-center gap-2"><ShoppingCart className="w-4 h-4"/> Order Items</span>
+                      {selectedFlavors.map(flavorName => {
+                        const qty = quantities[flavorName] || 1;
+                        const flavorData = flavorsList.find(f => f.name === flavorName);
+                        const price = flavorData ? flavorData.basePrice * qty : 0;
+                        return (
+                          <div key={flavorName} className="flex justify-between items-center">
+                            <span className="text-white font-sans font-semibold text-sm">{qty}x {flavorName}</span>
+                            <span className="text-neutral-400 font-sans text-sm">Php {price}</span>
+                          </div>
+                        )
+                      })}
+                      <div className="flex justify-between items-center pt-2 mt-2 border-t border-neutral-800 border-dashed">
+                        <span className="text-white font-sans font-bold text-base">Total</span>
+                        <span className="text-[#FF6B00] font-sans font-bold text-lg">Php {calculateTotal()}</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center border-b border-neutral-800 pb-4">
-                      <span className="text-neutral-400 font-sans text-sm">Size</span>
-                      <span className="text-white font-sans font-semibold text-right">{size || "-"}</span>
-                    </div>
-                    <div className="flex flex-col border-b border-neutral-800 pb-4 gap-2">
-                      <span className="text-neutral-400 font-sans text-sm">Customer Details</span>
+                    <div className="flex flex-col border-b border-neutral-800 pb-4 gap-2 mt-2">
+                      <span className="text-neutral-400 font-sans text-sm flex items-center gap-2"><User className="w-4 h-4"/> Customer Details</span>
                       <span className="text-white font-sans text-sm">{name || "-"}</span>
                       <span className="text-white font-sans text-sm">{phone || "-"}</span>
                     </div>
-                    <div className="flex flex-col pb-2 gap-2">
-                      <span className="text-neutral-400 font-sans text-sm">Address</span>
+                    <div className="flex flex-col pb-2 gap-2 mt-2">
+                      <span className="text-neutral-400 font-sans text-sm flex items-center gap-2"><MapPin className="w-4 h-4"/> Address</span>
                       <span className="text-white font-sans text-sm leading-relaxed">{address || "-"}</span>
                     </div>
                   </div>
@@ -216,7 +275,7 @@ export default function Inquire() {
           <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end text-left lg:text-right relative h-full w-full max-w-md lg:max-w-[320px] mx-auto lg:mx-0 lg:ml-auto">
             <h3 className="font-sans font-bold text-2xl md:text-3xl text-white mb-4 leading-tight max-w-xs">
               {step === 1 && "Pick your flavor."}
-              {step === 2 && "How hungry are you?"}
+              {step === 2 && "How many orders?"}
               {step === 3 && "Who is ordering?"}
               {step === 4 && "Where to deliver?"}
               {step === 5 && "Review your order."}
@@ -224,7 +283,7 @@ export default function Inquire() {
             
             <p className="text-neutral-400 font-sans text-sm max-w-[280px] mb-12 leading-relaxed">
               {step === 1 && "Choose one of our premium, freshly cooked takoyaki flavors."}
-              {step === 2 && "Select your preferred portion size."}
+              {step === 2 && "Select the quantity you want to order. Each order contains 8pcs."}
               {step === 3 && "Provide your basic contact details so we can reach you for updates."}
               {step === 4 && "Enter your complete delivery address including any helpful landmarks."}
               {step === 5 && "Review your details below. Click to send via Messenger or Instagram—your order will be automatically copied to your clipboard, so just paste it into our chat! Feel free to take a screenshot of this receipt for your records as well."}
@@ -241,8 +300,8 @@ export default function Inquire() {
                 <button 
                   onClick={nextStep}
                   disabled={
-                    (step === 1 && !flavor) ||
-                    (step === 2 && !size) ||
+                    (step === 1 && selectedFlavors.length === 0) ||
+                    (step === 2 && selectedFlavors.length === 0) ||
                     (step === 3 && (!name || !phone)) ||
                     (step === 4 && !address)
                   }

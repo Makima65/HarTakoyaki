@@ -14,8 +14,7 @@ const menuItems = [
       <><GiCheeseWedge className="text-yellow-400 w-3.5 h-3.5" /> Cheese</>
     ],
     description: "A warm, melty hug of cheese loaded with premium crab meat for a rich, ocean-sea fresh flavor.",
-    price8pcs: "₱110",
-    price4pcs: "₱55"
+    price8pcs: "₱110"
   },
   {
     id: "octobits",
@@ -27,8 +26,7 @@ const menuItems = [
       <><FaFishFins className="text-blue-400 w-3.5 h-3.5" /> Bonito Flakes</>
     ],
     description: "Golden takoyaki balls packed with juicy octopus bits, drizzled with traditional sauces and topped with bonito flakes.",
-    price8pcs: "₱110",
-    price4pcs: "₱55"
+    price8pcs: "₱110"
   },
   {
     id: "grilled-cheesebomb",
@@ -40,8 +38,7 @@ const menuItems = [
       <><GiOctopus className="text-pink-500 w-3.5 h-3.5" /> Octopus</>
     ],
     description: "A crispy, cheese explosion stuffed with your choice of Crab or Octobits for the ultimate savory bite.",
-    price8pcs: "₱150",
-    price4pcs: ""
+    price8pcs: "₱150"
   }
 ];
 
@@ -106,11 +103,6 @@ export default function Menu() {
                   <span className="text-[#FF6B00] font-sans font-bold text-2xl leading-none">
                     {item.price8pcs} <span className="text-xs font-normal text-neutral-500 tracking-normal">(8pcs)</span>
                   </span>
-                  {item.price4pcs && (
-                    <span className="text-neutral-400 font-sans font-medium text-lg leading-none mb-0.5">
-                      {item.price4pcs} <span className="text-[10px] font-normal text-neutral-600">(4pcs)</span>
-                    </span>
-                  )}
                 </div>
               </div>
             </motion.div>
